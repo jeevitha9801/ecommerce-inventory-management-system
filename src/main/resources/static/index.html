@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management System</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>Ecommerce Inventory Management System</h1>
+
+<!--        <p>-->
+<!--            An inventory management platform built with Spring Boot and PostgreSQL that enables product management, stock tracking, order processing, and order cancellation workflows with automatic inventory synchronization. The system demonstrates transactional processing, concurrent inventory updates, Optimistic Locking, Pessimistic Locking, and real-time inventory monitoring through an interactive dashboard.-->
+<!--        </p>-->
+        <p>An inventory management platform built to manage products, track stock availability, process orders, and maintain inventory consistency through transactions, Optimistic Locking, and Pessimistic Locking.</p>
+        <div class="action-buttons">
+            <button id="addProductBtn" onclick="openAddProductModal()">
+                ➕ Add Product
+            </button>
+
+            <button id="placeOrderBtn" onclick="openPlaceOrderModal()">
+                🛒 Place Order
+            </button>
+        </div>
+        <div id="addProductModal" class="modal">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <h2>Add Product</h2>
+
+                    <span
+                            class="close-btn"
+                            onclick="closeAddProductModal()">
+
+        ✕
+
+    </span>
+
+                </div>
+
+                <p class="modal-subtitle">
+                    Create a new inventory product
+                </p>
+
+                <label>Product Name</label>
+
+                <input
+                        type="text"
+                        id="productName"
+                        placeholder="Enter Product Name">
+
+                <label>Price</label>
+
+                <input
+                        type="number"
+                        id="productPrice"
+                        placeholder="Enter the Price">
+
+                <label>Stock</label>
+
+                <input
+                        type="number"
+                        id="productStock"
+                        placeholder="Enter the Stock">
+
+                <button onclick="saveProduct()">
+                    Save Product
+                </button>
+
+            </div>
+
+        </div>
+        <div id="placeOrderModal" class="modal">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <h2>Place Order</h2>
+
+                    <span class="close-btn"
+                          onclick="closePlaceOrderModal()">
+
+                ✕
+
+            </span>
+
+                </div>
+
+                <p class="modal-subtitle">
+                    Create a new customer order
+                </p>
+
+                <label>Select Product</label>
+
+                <select id="orderProduct">
+
+                </select>
+
+                <label>Quantity</label>
+
+                <input
+                        type="number"
+                        id="orderQuantity"
+                        placeholder="Enter Quantity">
+
+                <button onclick="placeOrder()">
+
+                    Place Order
+
+                </button>
+
+            </div>
+
+        </div>
+    </header>
+
+    <section class="stats-grid">
+
+        <div class="stat-card">
+            <h3>📦 Total Products</h3>
+            <span id="totalProducts">0</span>
+        </div>
+
+        <div class="stat-card">
+            <h3>🛒 Total Orders</h3>
+            <span id="totalOrders">0</span>
+        </div>
+
+        <div class="stat-card">
+            <h3>📈 Available Stock</h3>
+            <span id="availableStock">0</span>
+        </div>
+
+        <div class="stat-card">
+            <h3>❌ Cancelled Orders</h3>
+            <span id="cancelledOrders">0</span>
+        </div>
+
+    </section>
+
+    <section class="feature-buttons">
+
+        <button onclick="showInventoryHealth()">
+            📊 Inventory Health
+        </button>
+
+        <button onclick="showStockDistribution()">
+            📈 Stock Distribution
+        </button>
+
+        <button onclick="showLowStockProducts()">
+            ⚠️ Low Stock Products
+        </button>
+
+    </section>
+
+    <section class="feature-buttons second-row">
+
+        <button onclick="showProducts()">
+            📦 Product Inventory
+        </button>
+
+        <button onclick="showOrders()">
+            🛒 Recent Orders
+        </button>
+
+    </section>
+
+    <div id="contentArea"></div>
+
+</div>
+<div id="toast" class="toast"></div>
+<script src="script.js"></script>
+
+</body>
+</html>
